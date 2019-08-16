@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Registration</h2>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+
+<table>
+    <div>
+        <label id="status" style="color:red; visibility:hidden;">Sorry but accout with this login already exists!</label>
+    </div>
+    <tr>
+        <td><label>Login data: </label></td>
+    </tr>
+    <tr><td><label>Login: </label></td><td><input type="text" id="login" /></td></tr>
+    <tr><td><label>Password: </label></td><td><input type="text" id="password" /></td></tr>
+    <tr><td><label>Personal data: </label></td></tr>
+    <tr><td><label>First Name: </label></td><td><input type="text" id="firstName" /></td></tr>
+    <tr><td><label>Last Name: </label></td><td><input type="text" id="lastName" /></td></tr>
+    <tr><td><label>Patronymic: </label></td><td><input type="text" id="patronymic" /></td></tr>
+    <tr><td><label>Phone: </label></td><td><input type="text" id="phone" /></td></tr>
+    <tr><td><label>Email: </label></td><td><input type="text" id="email" /></td></tr>
+    <tr>
+        <td><label>Role: </label></td>
+        <td>
+            <select id="role">
+                <option>CEO</option>
+                <option>HeadOfUnit</option>
+                <option>Guard</option>
+                <option>Accountant</option>
+                <option>Translator</option>
+                <option>Developer</option>
+                <option>SupportEngineer</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td><label>Room: </label></td>
+        <td>
+            <select id="room">
+                <option>1.1</option>
+                <option>1.1a</option>
+                <option>A1-2</option>
+                <option>A1-3</option>
+                <option>A1-4</option>
+                <option>L0-1</option>
+            </select>
+        </td>
+    </tr>
+</table>
+
+<button id="register">Register</button>
+
+@Scripts.Render("~/bundles/register")
+
+

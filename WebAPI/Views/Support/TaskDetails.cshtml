@@ -1,0 +1,168 @@
+﻿@model WebAPI.Models.FullTaskInfo
+
+@{
+    ViewBag.Title = "TaskDetails";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/redirector")
+
+<h2>TaskDetails</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreatingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreatingDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreatingDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsClosed, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                <select id="IsClosed">
+                    <option selected>False</option>
+                    <option>True</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EngineerName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EngineerName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.EngineerName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreatorName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreatorName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CreatorName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div>
+        <p>Screenshot</p>
+        <input hidden="hidden" name="blobPath" />
+        <img id="blobImage" src="" />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" id="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#Save").click(function (event) {
+            event.preventDefault();
+            SaveData();
+        });
+
+        LoadData();
+
+        function LoadData() {
+            function getCookie(name) {
+                let matches = document.cookie.match(new RegExp(
+                    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                ));
+                return matches ? decodeURIComponent(matches[1]) : undefined;
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: '/api/tasks/?taskId=' + @Model.Id + '&userId=' + getCookie('id'),
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $('#Category').val(data.Category);
+                    $('#Text').val(data.Text);
+                    $('#CreatingDate').val(data.CreatingDate);
+                    $('#CreatorName').val(data.CreatorName);
+                    $('#EngineerId').val(data.EngineerId);
+                    $('#EngineerName').val(data.EngineerName);
+                    $('#IsClosed').val(data.IsClosed);
+                    $('#Comment').val(data.Comment);
+                    $('#blobImage').attr("src", data.BlobPath)
+
+                    if (data.EngineerId == getCookie("id")) {
+                        $('#Save').css("display", "inline-block");
+                    }
+                    else {
+                        $('#Save').css("display", "none");
+                    }
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        };
+
+        function SaveData() {
+            var taskData = {
+                Id: $('#Id').val(),
+                Category: $('#Category').val(),
+                Text: $('#Text').val(),
+                IsClosed: $('#IsClosed').val(),
+                Comment: $('#Comment').val()
+            };
+            console.log(taskData);
+
+            $.ajax({
+                type: 'PUT',
+                url: '/api/tasks',
+                data: 'id=' + taskData.Id + '&category=' + taskData.Category + "&text=" + taskData.Text +
+                    "&isClosed=" + taskData.IsClosed + "&comment=" + taskData.Comment,
+                dataType: 'json',
+                success: function (data) {
+                    document.location.href = "/Support/Tasks";
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        };
+    })
+</script>

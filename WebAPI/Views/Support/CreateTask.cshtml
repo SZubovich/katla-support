@@ -1,0 +1,40 @@
+﻿@model WebAPI.Models.FullTaskInfo
+
+@{
+    ViewBag.Title = "CreateTask";
+}
+@Scripts.Render("~/bundles/redirector")
+<h2>CreateTask</h2>
+@{
+    ViewBag.Title = "Task";
+}
+<h3>Please, tell us about your problems!</h3>
+@using (Html.BeginForm("CreateTask", "Support", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        <label>Select task category</label><br />
+        <select name="category">
+            <option>Internet problems</option>
+            <option>Network problems</option>
+            <option>Software problems</option>
+            <option>Hardware problems</option>
+            <option>Account problem</option>
+            <option selected="selected">Other problems</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="text">Description:</label><br />
+        <textarea name="text">Description of your problem.</textarea>
+    </div>
+    <div>
+        <label for="upload">Attach file</label>
+        <input type="file" name="upload" /><br>
+    </div>
+    <div>
+        <input hidden="hidden" value="-1" name="creatorId" id="creatorid" />
+    </div>
+
+    <input type="submit" value="Create" />
+}
+@Scripts.Render("~/bundles/idinitializer")

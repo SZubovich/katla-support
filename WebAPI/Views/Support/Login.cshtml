@@ -1,0 +1,26 @@
+﻿@model WebAPI.Models.AccountModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login</h2>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+<table>
+    <tr><td><label>Login: </label></td><td><input type="text" id="addName" /></td></tr>
+    <tr><td><label>Password: </label></td><td><input type="password" id="addAuthor" /></td></tr>
+</table>
+
+<button id="login">Enter</button>
+@Html.ActionLink("I don't have an account yet.", "Register")
+<div>
+    <label id="status" style="color:red; visibility:hidden;">Sorry but accout with that data doesn't exist. Check account or/and password!</label>
+</div>
+
+    @Scripts.Render("~/bundles/login")
+
+
