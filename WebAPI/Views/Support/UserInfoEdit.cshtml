@@ -3,20 +3,19 @@
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/redirector")
-<h2>UserInfoEdit</h2>
+<h2>User Info Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ProfileModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label for="FirstName" class="control-label col-md-2">First Name</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
@@ -24,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label for="LastName" class="control-label col-md-2">Last Name</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
@@ -58,14 +57,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="Role">
+                <select class="form-control" id="Role">
                     <option>CEO</option>
-                    <option>HeadOfUnit</option>
+                    <option value="HeadOfUnit">Head of unit</option>
                     <option>Guard</option>
                     <option>Accountant</option>
                     <option>Translator</option>
                     <option>Developer</option>
-                    <option>SupportEngineer</option>
+                    <option value="SupportEngineer">Support engineer</option>
                 </select>
             </div>
         </div>
@@ -73,7 +72,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Room, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="Room">
+                <select class="form-control" id="Room">
                     <option>1.1</option>
                     <option>1.1a</option>
                     <option>A1-2</option>
@@ -86,7 +85,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" id="Save" />
+                <input type="submit" value="Save" class="btn btn-info" id="Save" />
             </div>
         </div>
     </div>

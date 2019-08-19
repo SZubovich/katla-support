@@ -4,37 +4,80 @@
     ViewBag.Title = "CreateTask";
 }
 @Scripts.Render("~/bundles/redirector")
-<h2>CreateTask</h2>
+<h2>Create Task</h2>
 @{
     ViewBag.Title = "Task";
 }
 <h3>Please, tell us about your problems!</h3>
+
 @using (Html.BeginForm("CreateTask", "Support", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div>
-        <label>Select task category</label><br />
-        <select name="category">
-            <option>Internet problems</option>
-            <option>Network problems</option>
-            <option>Software problems</option>
-            <option>Hardware problems</option>
-            <option>Account problem</option>
-            <option selected="selected">Other problems</option>
-        </select>
-    </div>
-
-    <div>
-        <label for="text">Description:</label><br />
-        <textarea name="text">Description of your problem.</textarea>
-    </div>
-    <div>
-        <label for="upload">Attach file</label>
-        <input type="file" name="upload" /><br>
-    </div>
+<div class="form-horizontal">
+    <hr />
     <div>
         <input hidden="hidden" value="-1" name="creatorId" id="creatorid" />
     </div>
-
-    <input type="submit" value="Create" />
+    <div class="form-group">
+        <label class="control-label col-md-2" for="role">Category</label>
+        <div class="col-md-10">
+            <select class="form-control" name="category">
+                <option>Internet problems</option>
+                <option>Network problems</option>
+                <option>Software problems</option>
+                <option>Hardware problems</option>
+                <option>Account problem</option>
+                <option selected="selected">Other problems</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Description</label>
+        <div class="col-md-10">
+            <textarea class="form-control" rows="5" placeholder="Description of your problem." name="text"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Attach file</label>
+        <div class="col-md-10">
+            <input type="file" class="form-control" name="upload" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-11">
+            <input type="submit" value="Create" class="btn btn-info">
+        </div>
+    </div>
+</div>
 }
-@Scripts.Render("~/bundles/idinitializer")
+        @*@using (Html.BeginForm("CreateTask", "Support", FormMethod.Post, new { enctype = "multipart/form-data" })){
+            <div class="form-horizontal">
+                <hr />
+                <div class="form-group">
+                    <label class="control-label col-md-2">Select task category</label><br />
+                    <div class="col-md-10">
+                        <select class="form-control" name="category">
+                            <option>Internet problems</option>
+                            <option>Network problems</option>
+                            <option>Software problems</option>
+                            <option>Hardware problems</option>
+                            <option>Account problem</option>
+                            <option selected="selected">Other problems</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="text">Description</label><br />
+                    <textarea class="form-control" rows="4" placeholder="Description of your problem." name="text"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="upload">Attach file</label>
+                    <input type="file" class="form-control-file" name="upload" /><br>
+                </div>
+                <div>
+                    <input hidden="hidden" value="-1" name="creatorId" id="creatorid" />
+                </div>
+
+                <input type="submit" value="Create" />
+            </div>
+            }*@
+        @Scripts.Render("~/bundles/idinitializer")

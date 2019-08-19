@@ -8,21 +8,72 @@
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/redirector")
 
-<h2>My profile</h2>
+<h2>User info</h2>
+<hr />
 
 <div>
-    <hr />
-    <table>
-        <tr><td><label>First Name: </label></td><td><input disabled="disabled" type="text" id="firstName" /></td></tr>
-        <tr><td><label>Last Name: </label></td><td><input disabled="disabled" type="text" id="lastName" /></td></tr>
-        <tr><td><label>Patronymic: </label></td><td><input disabled="disabled" type="text" id="patronymic" /></td></tr>
-        <tr><td><label>Phone: </label></td><td><input disabled="disabled" type="text" id="phone" /></td></tr>
-        <tr><td><label>Email: </label></td><td><input disabled="disabled" type="text" id="email" /></td></tr>
-        <tr><td><label>Role: </label></td><td><input disabled="disabled" type="text" id="role" /></td></tr>
-        <tr><td><label>Room: </label></td><td><input disabled="disabled" type="text" id="room" /></td></tr>
-    </table>
+    <dl class="dl-horizontal">
+        <dt>
+            <label>First Name</label>
+        </dt>
+        <dd>
+            <label id="firstName" class="label-inf"></label>
+        </dd>
+        <dt>
+            <label>Last Name</label>
+        </dt>
+
+        <dd>
+            <label id="lastName" class="label-inf"></label>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </dt>
+
+        <dd>
+            <label id="patronymic" class="label-inf"></label>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            <label id="phone" class="label-inf"></label>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            <label id="email" class="label-inf"></label>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            <label id="role" class="label-inf"></label>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Room)
+        </dt>
+
+        <dd>
+            <label id="room" class="label-inf"></label>
+        </dd>
+    </dl>
 </div>
 </hr>
-@Html.ActionLink("Edit", "UserInfoEdit")
+@*@Html.ActionLink("Edit", "UserInfoEdit")*@
+<div class="form-group">
+    <div class="col-md-offset-1 col-md-10">
+        <a href="/Support/UserInfoEdit"><button class="btn btn-info">Edit</button></a>
+    </div>
+</div>
 
 @Scripts.Render("~/bundles/userinfo")

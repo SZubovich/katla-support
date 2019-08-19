@@ -15,13 +15,13 @@
             url: '/api/profiles/' + getCookie("id"),
             dataType: 'json',
             success: function (data) {
-                $('#firstName').val(data.FirstName);
-                $('#lastName').val(data.LastName);
-                $('#patronymic').val(data.Patronymic);
-                $('#phone').val(data.Phone);
-                $('#email').val(data.Email);
-                $('#role').val(data.Role);
-                $('#room').val(data.Room);
+                $('#firstName').text(data.FirstName);
+                $('#lastName').text(data.LastName);
+                $('#patronymic').text(data.Patronymic);
+                $('#phone').text(data.Phone);
+                $('#email').text(data.Email);
+                $('#role').text(data.Role);
+                $('#room').text(data.Room);
             },
             error: function () {
                 console.log("Error");

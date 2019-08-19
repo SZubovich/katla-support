@@ -11,10 +11,11 @@
 <div id="tableBlock"></div>
 
 <style type="text/css">
-    td{
+    td {
         padding: 10px;
     }
-    th{
+
+    th {
         padding: 0 10px 0 10px;
     }
 </style>
@@ -52,15 +53,20 @@
         $.each(tasks, function (index, task) {
             strResult += '<tr style="background-color:' + (task.IsClosed ? 'coral;"' : 'greenyellow;"') + "><td>" + task.Id + "</td><td> " + task.Category + "</td><td>" +
                 task.Text + "</td><td>" + task.CreatingDate +
-                "</td>" + "<td><a id='details' onclick='Show(" + task.Id + ");' >Details</a></td></tr>";
+                "</td>" + "<td><a id='details' onclick='Show(" + task.Id + ");' style='cursor:pointer;'><button class='btn btn-info'>Details</button></a></td></tr>";
         });
         strResult += "</table>";
         $("#tableBlock").html(strResult);
+        
     }
 
     function Show(taskid) {
         document.location.href = "/Support/TaskDetails/" + taskid;
     }
 </script>
-
-@Html.ActionLink("Create new task", "CreateTask")
+<hr />
+<div class="form-group">
+    <div class="col-md-offset-0 col-md-11">
+        <a href="/Support/CreateTask"><button id="entr-btn" class="btn btn-info">Create a new task</button></a>
+    </div>
+</div>

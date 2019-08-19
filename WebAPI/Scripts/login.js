@@ -1,13 +1,16 @@
 ﻿$(document).ready(function () {
-    $("#login").click(function (event) {
+    $("#entr-btn").click(function (event) {
         event.preventDefault();
         Login();
     });
 
+
+    console.log(document);
+
     function Login() {
         var accountData = {
-            Login: $('#addName').val(),
-            Password: $('#addAuthor').val(),
+            Login: $('#login').val(),
+            Password: $('#password').val(),
         };
 
         $.ajax({

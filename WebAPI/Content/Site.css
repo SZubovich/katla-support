@@ -15,3 +15,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+h2 {
+    color: #5bc0de;
+}
+footer {
+    bottom: 0;
+    right: 20px;
+    position: fixed;
+    font-style: oblique;
+    font-size: 16px;
+    color: #5bc0de;
+}
+.label-inf{
+    font-style: oblique;
+}
+#blobImage{
+    max-height:200px;
+    cursor: pointer;
+}
+.admin-form{
+    display: none;
+}

@@ -8,7 +8,7 @@
 @Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/redirector")
 
-<h2>TaskDetails</h2>
+<h2>Task Details</h2>
 
 @using (Html.BeginForm())
 {
@@ -22,72 +22,76 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            <label id="Category" class="label-inf control-label col-md-0"></label>
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+            <label id="Text" class="label-inf control-label col-md-0"></label>
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.CreatingDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CreatingDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CreatingDate, "", new { @class = "text-danger" })
+            <label id="CreatingDate" class="label-inf control-label col-md-0"></label>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.IsClosed, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">Creator name</label>
         <div class="col-md-10">
-            <div class="checkbox">
-                <select id="IsClosed">
-                    <option selected>False</option>
-                    <option>True</option>
+            <label id="CreatorName" class="label-inf control-label col-md-0"></label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Engineer name</label>
+        <div class="col-md-10">
+            <label id="EngineerName" class="label-inf control-label col-md-0"></label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Status</label>
+        <div class="col-md-10">
+            <div class="admin-form">
+                <select class="form-control" id="IsClosed-select">
+                    <option value="false">Active</option>
+                    <option value="true">Closed</option>
                 </select>
+            </div>
+            <div class="user-form">
+                <label id="IsClosed-label" class="label-inf control-label col-md-0"></label>
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.EngineerName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">Comment</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.EngineerName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EngineerName, "", new { @class = "text-danger" })
+            <div class="admin-form">
+                <textarea class="form-control" rows="3" id="Comment"></textarea>
+            </div>
+            <div class="user-form">
+                <label id="comment-label" class="label-inf control-label col-md-0"></label>
+            </div>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.CreatorName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label class="control-label col-md-2">Screenshot</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CreatorName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CreatorName, "", new { @class = "text-danger" })
+            <input hidden="hidden" name="blobPath" />
+            <img id="blobImage" src="" />
         </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div>
-        <p>Screenshot</p>
-        <input hidden="hidden" name="blobPath" />
-        <img id="blobImage" src="" />
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" id="Save" class="btn btn-default" />
+            <input type="submit" value="Save" id="Save" class="btn btn-info" />
         </div>
     </div>
 </div>
@@ -99,6 +103,9 @@
         $("#Save").click(function (event) {
             event.preventDefault();
             SaveData();
+        });
+        $("#blobImage").click(function (event) {
+            window.open($('#blobImage').attr("src"));
         });
 
         LoadData();
@@ -116,22 +123,36 @@
                 url: '/api/tasks/?taskId=' + @Model.Id + '&userId=' + getCookie('id'),
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
-                    $('#Category').val(data.Category);
-                    $('#Text').val(data.Text);
-                    $('#CreatingDate').val(data.CreatingDate);
-                    $('#CreatorName').val(data.CreatorName);
+                    $('#Category').text(data.Category);
+                    $('#Text').text(data.Text);
+                    $('#CreatingDate').text(new Date(data.CreatingDate).toLocaleDateString());
+                    $('#CreatorName').text(data.CreatorName);
                     $('#EngineerId').val(data.EngineerId);
-                    $('#EngineerName').val(data.EngineerName);
-                    $('#IsClosed').val(data.IsClosed);
+                    $('#EngineerName').text(data.EngineerName);
                     $('#Comment').val(data.Comment);
-                    $('#blobImage').attr("src", data.BlobPath)
+                    $('#comment-label').val(data.Comment);
+                    $('#blobImage').attr("src", data.BlobPath);
+
+                    if (data.IsClosed) {
+                        $('#IsClosed-label').text("Closed");
+                        $('#IsClosed-label').css("color", "coral");
+                        $('#IsClosed-select').val("true");
+                    }
+                    else {
+                        $('#IsClosed-label').text("Active");
+                        $('#IsClosed-label').css("color", "green");
+                        $('#IsClosed-select').val("false");
+                    }
 
                     if (data.EngineerId == getCookie("id")) {
                         $('#Save').css("display", "inline-block");
+                        $('.admin-form').css("display", "inline-block")
+                        $('.user-form').css("display", "none")
                     }
                     else {
                         $('#Save').css("display", "none");
+                        $('.admin-form').css("display", "none")
+                        $('.user-form').css("display", "inline-block")
                     }
                 },
                 error: function () {
@@ -143,9 +164,7 @@
         function SaveData() {
             var taskData = {
                 Id: $('#Id').val(),
-                Category: $('#Category').val(),
-                Text: $('#Text').val(),
-                IsClosed: $('#IsClosed').val(),
+                IsClosed: $('#IsClosed-select').val(),
                 Comment: $('#Comment').val()
             };
             console.log(taskData);
@@ -153,7 +172,7 @@
             $.ajax({
                 type: 'PUT',
                 url: '/api/tasks',
-                data: 'id=' + taskData.Id + '&category=' + taskData.Category + "&text=" + taskData.Text +
+                data: 'id=' + taskData.Id + 
                     "&isClosed=" + taskData.IsClosed + "&comment=" + taskData.Comment,
                 dataType: 'json',
                 success: function (data) {

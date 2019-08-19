@@ -235,10 +235,6 @@ namespace DAL.Repositories.ADONET
 
             sqlCommand.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int, 4));
             sqlCommand.Parameters["@Id"].Value = task.Id;
-            sqlCommand.Parameters.Add(new SqlParameter("@Text", SqlDbType.Text));
-            sqlCommand.Parameters["@Text"].Value = task.Text;
-            sqlCommand.Parameters.Add(new SqlParameter("@Category", SqlDbType.NVarChar, 50));
-            sqlCommand.Parameters["@Category"].Value = task.Category;
             sqlCommand.Parameters.Add(new SqlParameter("@ClosingDate", SqlDbType.DateTime));
             sqlCommand.Parameters["@ClosingDate"].Value = DateTime.Now;
             sqlCommand.Parameters.Add(new SqlParameter("@Comment", SqlDbType.NVarChar, 50));
