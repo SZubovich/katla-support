@@ -36,7 +36,7 @@
                 WriteResponse(data);
             },
             error: function (x, y, z) {
-                alert(x + '\n' + y + '\n' + z);
+                alert("Something goes wrong!");
             }
         });
     }
@@ -52,7 +52,7 @@
         var strResult = "<table><th>ID</th><th>Category</th><th>Text</th><th>Creation Date</th>";
         $.each(tasks, function (index, task) {
             strResult += '<tr style="background-color:' + (task.IsClosed ? 'coral;"' : 'greenyellow;"') + "><td>" + task.Id + "</td><td> " + task.Category + "</td><td>" +
-                task.Text + "</td><td>" + task.CreatingDate +
+                task.Text + "</td><td>" + (new Date(task.CreatingDate).toLocaleDateString()) +
                 "</td>" + "<td><a id='details' onclick='Show(" + task.Id + ");' style='cursor:pointer;'><button class='btn btn-info'>Details</button></a></td></tr>";
         });
         strResult += "</table>";

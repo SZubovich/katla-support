@@ -6,7 +6,7 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/bundles/redirector")
+@*@Scripts.Render("~/bundles/redirector")*@
 
 <h2>Task Details</h2>
 
@@ -130,7 +130,7 @@
                     $('#EngineerId').val(data.EngineerId);
                     $('#EngineerName').text(data.EngineerName);
                     $('#Comment').val(data.Comment);
-                    $('#comment-label').val(data.Comment);
+                    $('#comment-label').text(data.Comment);
                     $('#blobImage').attr("src", data.BlobPath);
 
                     if (data.IsClosed) {

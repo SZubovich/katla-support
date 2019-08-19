@@ -1,4 +1,5 @@
 ﻿if (getCookie("id") < 0) {
+    alert("You will be redirected!");
     document.location.href = "/Support/Login";
 }
 
